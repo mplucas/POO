@@ -1,0 +1,24 @@
+package dados;
+
+import java.util.ArrayList;
+
+public class Contribuinte {
+
+	private int id;
+	private String cpf;
+	private int idade;
+	private String endereco;
+	private int contaBancaria;
+	private ArrayList<Dependente> dependentes;
+	private ArrayList<Bem> bens;
+	private ArrayList<NotaFiscal> despesas;
+	private ArrayList<ContraCheque> receitas;
+	
+	public Contribuinte() {
+		dependentes = new ArrayList<Dependente>();
+		bens = new ArrayList<Bem>();
+		despesas = new ArrayList<NotaFiscal>();
+		receitas = new ArrayList<ContraCheque>();
+	}
+	
+}

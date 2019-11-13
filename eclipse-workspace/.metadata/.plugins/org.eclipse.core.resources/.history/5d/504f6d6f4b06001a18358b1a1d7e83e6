@@ -1,0 +1,15 @@
+package dados;
+
+import java.util.ArrayList;
+
+public class PessoaJuridica {
+
+	private int id;
+	private String cnpj;
+	private String nomePJ;
+	private String endereco;
+	private int numFuncionarios;
+	private ArrayList<NotaFiscal> notasFiscais;
+	private ArrayList<ContraCheque> contraCheques;
+	
+}

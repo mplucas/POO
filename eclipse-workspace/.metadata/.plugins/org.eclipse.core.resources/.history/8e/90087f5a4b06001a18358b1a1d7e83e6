@@ -1,0 +1,11 @@
+package dados;
+
+public class PessoaJuridica {
+
+	private int id;
+	private String cnpj;
+	private String nomePJ;
+	private String endereco;
+	private int numFuncionarios;
+	
+}

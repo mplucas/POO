@@ -1,0 +1,76 @@
+package dados;
+
+import java.util.ArrayList;
+
+public class Contribuinte {
+
+	private int id;
+	private String cpf;
+	private int idade;
+	private String endereco;
+	private int contaBancaria;
+	private ArrayList<NotaFiscal> notasFiscais;
+	private ArrayList<ContraCheque> contraCheques;
+	
+	public Contribuinte() {
+		notasFiscais = new ArrayList<NotaFiscal>();
+		contraCheques = new ArrayList<ContraCheque>();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public int getContaBancaria() {
+		return contaBancaria;
+	}
+
+	public void setContaBancaria(int contaBancaria) {
+		this.contaBancaria = contaBancaria;
+	}
+
+	public ArrayList<NotaFiscal> getNotasFiscais() {
+		return notasFiscais;
+	}
+
+	public void setNotasFiscais(ArrayList<NotaFiscal> notasFiscais) {
+		this.notasFiscais = notasFiscais;
+	}
+
+	public ArrayList<ContraCheque> getContraCheques() {
+		return contraCheques;
+	}
+
+	public void setContraCheques(ArrayList<ContraCheque> contraCheques) {
+		this.contraCheques = contraCheques;
+	}
+	
+}

@@ -1,0 +1,10 @@
+package dados;
+
+public class Dependente {
+
+	private String cpf;
+	private String nome;
+	private int idade;
+	private String endereco;
+	
+}
