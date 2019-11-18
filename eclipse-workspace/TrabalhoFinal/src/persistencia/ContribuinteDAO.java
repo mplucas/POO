@@ -1,0 +1,117 @@
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class ContribuinteDAO {
+
+	private static ContribuinteDAO instance = null;
+	private PreparedStatement sqlInsert;
+	private PreparedStatement sqlDelete;
+	private PreparedStatement sqlSelect;
+	private PreparedStatement sqlUpdate;
+	
+	private ContribuinteDAO(){
+		Connection conex = Conexao.getConexao();
+		
+		try {
+		
+			String strInsert = "INSERT INTO contribuinte (cpf, nome, idade, endereco, contabancaria) "
+					+ " VALUES(?,?,?,?,?)";
+			sqlInsert = conex.prepareStatement(strInsert);
+			String strDelete = "DELETE FROM contribuinte "
+					+ "WHERE id = ?";
+			sqlDelete = conex.prepareStatement(strDelete);
+			String strSelect = "SELECT * FROM contribuinte "
+					+ "WHERE id = ?";
+			sqlSelect = conex.prepareStatement(strSelect);
+			String strUpdate = "UPDATE contribuinte "
+					+ "SET nome = ?, idade = ?, endereco = ?, contabancaria = ?"
+					+ "WHERE id = ?";
+			sqlUpdate = conex.prepareStatement(strUpdate);
+		
+		}catch(SQLException e) {
+		
+			e.printStackTrace();
+		
+		}
+		
+	}
+		
+	public static ContribuinteDAO getInstance() {
+		if(instance == null) {
+			instance = new ContribuinteDAO();
+		}
+		
+		return instance;
+	}
+		
+	public void insert(contribuinte contribuinte) {
+	
+		try {
+		
+			sqlInsert.setString(1, String.valueOf(contribuinte.getCpf()));
+			sqlInsert.setString(2, contribuinte.getNome());
+			sqlInsert.executeUpdate();
+		
+		}catch(SQLException e){
+		
+			e.printStackTrace();
+		
+		}
+	
+	}
+	
+	public contribuinte select(int id) {
+	
+		contribuinte contribuinte = null;
+		
+		try {
+		
+			sqlSelect.setInt(1, id);
+			ResultSet rs = sqlSelect.executeQuery();
+			
+			if(rs.next()) {
+			
+				contribuinte = new contribuinte();
+				contribuinte.setId(rs.getInt("id"));
+				contribuinte.setNome(rs.getString("nome"));
+				contribuinte.setCpf( rs.getInt("cpf")  );
+			
+			}
+		}catch(SQLException e) {
+		
+			e.printStackTrace();
+		
+		}
+		
+		return contribuinte;
+	
+	}
+	
+	public void delete( int id ) {
+		
+		try {
+			sqlDelete.setInt(1, id);
+			sqlDelete.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void update( int id, contribuinte contribuinte ) {
+		
+		try {
+			sqlUpdate.setString(1, String.valueOf(contribuinte.getCpf()) );
+			sqlUpdate.setString(2, contribuinte.getNome() );
+			sqlUpdate.setInt(3, id);
+			sqlUpdate.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+}

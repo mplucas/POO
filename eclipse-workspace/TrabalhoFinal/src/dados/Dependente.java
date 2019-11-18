@@ -7,6 +7,7 @@ public class Dependente {
 	private String nome;
 	private int idade;
 	private String endereco;
+	private int id_contribuinte;
 	
 	public int getId() {
 		return id;
@@ -39,6 +40,14 @@ public class Dependente {
 	}
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public int getId_contribuinte() {
+		return id_contribuinte;
+	}
+
+	public void setId_contribuinte(int id_contribuinte) {
+		this.id_contribuinte = id_contribuinte;
 	}
 	
 }
