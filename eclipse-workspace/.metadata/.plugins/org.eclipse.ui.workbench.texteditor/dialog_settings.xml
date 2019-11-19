@@ -6,25 +6,40 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="dependente"/>
+		<item key="selection" value="PessoaJuridica"/>
 		<list key="findhistory">
+			<item value="Dependente"/>
 			<item value="dependente"/>
-			<item value="contribuinte"/>
-			<item value="ContribuinteDAO"/>
+			<item value="dependenteDAO"/>
+			<item value="DependenteDAO"/>
+			<item value="NotaFiscal"/>
+			<item value="notaFiscal"/>
+			<item value="notaFiscalDAO"/>
+			<item value="NotaFiscalDAO"/>
+			<item value="notaFiscals"/>
 			<item value="sqlSelect"/>
 			<item value="strSelect"/>
+			<item value="contribuinte"/>
+			<item value="ContribuinteDAO"/>
 			<item value="cliente"/>
 			<item value="ClienteDAO"/>
 		</list>
 		<list key="replacehistory">
-			<item value="Dependente"/>
-			<item value="dependente"/>
-			<item value="DependenteDAO"/>
-			<item value="sqlSelectContribuinte"/>
-			<item value="strSelectContribuinte"/>
-			<item value="contribuinte"/>
-			<item value="ContribuinteDAO"/>
-			<item value="Cont"/>
+			<item value="PessoaJuridica"/>
+			<item value="pessoaJuridica"/>
+			<item value="pessoaJuridicaDAO"/>
+			<item value="PessoaJuridicaDAO"/>
+			<item value="ContraCheque"/>
+			<item value="contraCheque"/>
+			<item value="contraChequeDAO"/>
+			<item value="ContraChequeDAO"/>
+			<item value="notasFiscais"/>
+			<item value="sqlSelContribuinte"/>
+			<item value="strSelContribuinte"/>
+			<item value="NotaFiscal"/>
+			<item value="notaFiscal"/>
+			<item value="notaFiscalDAO"/>
+			<item value="NotaFiscalDAO"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

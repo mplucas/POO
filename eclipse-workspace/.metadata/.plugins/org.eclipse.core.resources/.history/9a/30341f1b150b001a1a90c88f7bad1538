@@ -1,0 +1,139 @@
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import dados.NotaFiscal;
+
+public class NotaFiscalDAO {
+
+	private static NotaFiscalDAO instance = null;
+	private PreparedStatement sqlInsert;
+	private PreparedStatement sqlDelete;
+	private PreparedStatement sqlSelContribuinte;
+	private PreparedStatement sqlSelPJ;
+	private PreparedStatement sqlUpdate;
+	
+	private NotaFiscalDAO(){
+		Connection conex = Conexao.getConexao();
+		
+		try {
+		
+			String strInsert = "INSERT INTO notaFiscal (numprotocolo, cnpj, valor, id_contribuinte, id_pessoajuridica) "
+					+ " VALUES(?,?,?,?,?)";
+			sqlInsert = conex.prepareStatement(strInsert);
+			
+			String strDelete = "DELETE FROM notaFiscal "
+					+ "WHERE id = ?";
+			sqlDelete = conex.prepareStatement(strDelete);
+			
+			String strSelContribuinte = "SELECT * FROM notaFiscal "
+					+ "WHERE id_contribuinte = ?";
+			sqlSelContribuinte = conex.prepareStatement(strSelContribuinte);
+			
+			String strSelPJ = "SELECT * FROM notaFiscal "
+					+ "WHERE id_contribuinte = ?";
+			sqlSelPJ = conex.prepareStatement(strSelPJ);
+			
+			String strUpdate = "UPDATE notaFiscal "
+					+ "SET nome = ?, idade = ?, endereco = ?, id_contribuinte = ?"
+					+ "WHERE id = ?";
+			sqlUpdate = conex.prepareStatement(strUpdate);
+		
+		}catch(SQLException e) {
+		
+			e.printStackTrace();
+		
+		}
+		
+	}
+		
+	public static NotaFiscalDAO getInstance() {
+		if(instance == null) {
+			instance = new NotaFiscalDAO();
+		}
+		
+		return instance;
+	}
+		
+	public void insert(NotaFiscal notaFiscal) {
+	
+		try {
+		
+			sqlInsert.setString(1, notaFiscal.getCpf());
+			sqlInsert.setString(2, notaFiscal.getNome());
+			sqlInsert.setInt(3, notaFiscal.getIdade());
+			sqlInsert.setString(4, notaFiscal.getEndereco());
+			sqlInsert.setInt(5, notaFiscal.getId_contribuinte());
+			sqlInsert.executeUpdate();
+		
+		}catch(SQLException e){
+		
+			e.printStackTrace();
+		
+		}
+	
+	}
+	
+	public ArrayList<NotaFiscal> select(int id_contribuinte) {
+	
+		ArrayList<NotaFiscal> notaFiscals = new ArrayList<NotaFiscal>();
+		NotaFiscal notaFiscal = null;
+		
+		try {
+		
+			sqlSelContribuinte.setInt(1, id_contribuinte);
+			ResultSet rs = sqlSelContribuinte.executeQuery();
+			
+			if(rs.next()) {
+			
+				notaFiscal = new NotaFiscal();
+				notaFiscal.setId(rs.getInt("id"));
+				notaFiscal.setCpf(rs.getString("cpf"));
+				notaFiscal.setNome(rs.getString("nome"));
+				notaFiscal.setIdade(rs.getInt("idade"));
+				notaFiscal.setEndereco(rs.getString("endereco"));
+				notaFiscal.setId_contribuinte(rs.getInt("id_contribuinte"));
+				notaFiscals.add(notaFiscal);
+			
+			}
+		}catch(SQLException e) {
+		
+			e.printStackTrace();
+		
+		}
+		
+		return notaFiscals;
+	
+	}
+	
+	public void delete( int id ) {
+		
+		try {
+			sqlDelete.setInt(1, id);
+			sqlDelete.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void update( int id, NotaFiscal notaFiscal ) {
+		
+		try {
+			sqlUpdate.setString(1, notaFiscal.getNome() );
+			sqlUpdate.setInt(2, notaFiscal.getIdade() );
+			sqlUpdate.setString(3, notaFiscal.getEndereco() );
+			sqlUpdate.setInt(4, notaFiscal.getId_contribuinte() );
+			sqlUpdate.setInt(5, id);
+			sqlUpdate.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+}

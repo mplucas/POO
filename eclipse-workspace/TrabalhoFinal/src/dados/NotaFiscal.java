@@ -6,6 +6,8 @@ public class NotaFiscal {
 	private int numProtocolo;
 	private String cnpj;
 	private float valor;
+	private int id_contribuinte;
+	private int id_pessoajuridica;
 	
 	public int getId() {
 		return id;
@@ -30,6 +32,18 @@ public class NotaFiscal {
 	}
 	public void setValor(float valor) {
 		this.valor = valor;
+	}
+	public int getId_contribuinte() {
+		return id_contribuinte;
+	}
+	public void setId_contribuinte(int id_contribuinte) {
+		this.id_contribuinte = id_contribuinte;
+	}
+	public int getId_pessoajuridica() {
+		return id_pessoajuridica;
+	}
+	public void setId_pessoajuridica(int id_pessoajuridica) {
+		this.id_pessoajuridica = id_pessoajuridica;
 	}
 	
 }

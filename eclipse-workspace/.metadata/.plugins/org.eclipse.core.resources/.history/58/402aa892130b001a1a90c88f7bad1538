@@ -1,0 +1,133 @@
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import dados.Bem;
+
+public class BemDAO {
+
+	private static BemDAO instance = null;
+	private PreparedStatement sqlInsert;
+	private PreparedStatement sqlDelete;
+	private PreparedStatement sqlSelect;
+	private PreparedStatement sqlUpdate;
+	
+	private BemDAO(){
+		Connection conex = Conexao.getConexao();
+		
+		try {
+		
+			String strInsert = "INSERT INTO bem (nome, tipo, valor, id_contribuinte) "
+					+ " VALUES(?,?,?,?)";
+			sqlInsert = conex.prepareStatement(strInsert);
+			
+			String strDelete = "DELETE FROM bem "
+					+ "WHERE id = ?";
+			sqlDelete = conex.prepareStatement(strDelete);
+			
+			String strSelect = "SELECT * FROM bem "
+					+ "WHERE id_contribuinte = ?";
+			sqlSelect = conex.prepareStatement(strSelect);
+			
+			String strUpdate = "UPDATE bem "
+					+ "SET nome = ?, tipo = ?, valor = ?, id_contribuinte = ?"
+					+ "WHERE id = ?";
+			sqlUpdate = conex.prepareStatement(strUpdate);
+		
+		}catch(SQLException e) {
+		
+			e.printStackTrace();
+		
+		}
+		
+	}
+		
+	public static BemDAO getInstance() {
+		if(instance == null) {
+			instance = new BemDAO();
+		}
+		
+		return instance;
+	}
+		
+	public void insert(Bem bem) {
+	
+		try {
+		
+			sqlInsert.setString(1, bem.getNome());
+			sqlInsert.setString(2, bem.getTipo());
+			sqlInsert.setString(3, bem.getValor());
+			sqlInsert.setInt(4, bem.getId_contribuinte());
+			sqlInsert.executeUpdate();
+		
+		}catch(SQLException e){
+		
+			e.printStackTrace();
+		
+		}
+	
+	}
+	
+	public ArrayList<Bem> select(int id_contribuinte) {
+	
+		ArrayList<Bem> bems = new ArrayList<Bem>();
+		Bem bem = null;
+		
+		try {
+		
+			sqlSelect.setInt(1, id_contribuinte);
+			ResultSet rs = sqlSelect.executeQuery();
+			
+			if(rs.next()) {
+			
+				bem = new Bem();
+				bem.setId(rs.getInt("id"));
+				bem.setCpf(rs.getString("cpf"));
+				bem.setNome(rs.getString("nome"));
+				bem.setIdade(rs.getInt("idade"));
+				bem.setEndereco(rs.getString("endereco"));
+				bem.setId_contribuinte(rs.getInt("id_contribuinte"));
+				bems.add(bem);
+			
+			}
+		}catch(SQLException e) {
+		
+			e.printStackTrace();
+		
+		}
+		
+		return bems;
+	
+	}
+	
+	public void delete( int id ) {
+		
+		try {
+			sqlDelete.setInt(1, id);
+			sqlDelete.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void update( int id, Bem bem ) {
+		
+		try {
+			sqlUpdate.setString(1, bem.getNome() );
+			sqlUpdate.setInt(2, bem.getIdade() );
+			sqlUpdate.setString(3, bem.getEndereco() );
+			sqlUpdate.setInt(4, bem.getId_contribuinte() );
+			sqlUpdate.setInt(5, id);
+			sqlUpdate.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+}

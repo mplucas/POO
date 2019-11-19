@@ -6,6 +6,7 @@ public class Bem {
 	private String nome;
 	private String tipo;
 	private float valor;
+	private int id_contribuinte;
 	
 	public int getId() {
 		return id;
@@ -32,6 +33,14 @@ public class Bem {
 	}
 	public void setValor(float valor) {
 		this.valor = valor;
+	}
+
+	public int getId_contribuinte() {
+		return id_contribuinte;
+	}
+
+	public void setId_contribuinte(int id_contribuinte) {
+		this.id_contribuinte = id_contribuinte;
 	}
 	
 }

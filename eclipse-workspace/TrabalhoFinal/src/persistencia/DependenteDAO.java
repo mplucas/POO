@@ -73,14 +73,14 @@ public class DependenteDAO {
 	
 	}
 	
-	public ArrayList<Dependente> select(int id) {
+	public ArrayList<Dependente> select(int id_contribuinte) {
 	
 		ArrayList<Dependente> dependentes = new ArrayList<Dependente>();
 		Dependente dependente = null;
 		
 		try {
 		
-			sqlSelect.setInt(1, id);
+			sqlSelect.setInt(1, id_contribuinte);
 			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
@@ -119,9 +119,11 @@ public class DependenteDAO {
 	public void update( int id, Dependente dependente ) {
 		
 		try {
-			sqlUpdate.setString(1, dependente.getCpf() );
-			sqlUpdate.setString(2, dependente.getNome() );
-			sqlUpdate.setInt(3, id);
+			sqlUpdate.setString(1, dependente.getNome() );
+			sqlUpdate.setInt(2, dependente.getIdade() );
+			sqlUpdate.setString(3, dependente.getEndereco() );
+			sqlUpdate.setInt(4, dependente.getId_contribuinte() );
+			sqlUpdate.setInt(5, id);
 			sqlUpdate.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
