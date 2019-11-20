@@ -20,10 +20,17 @@ import com.jgoodies.forms.layout.RowSpec;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
 import javax.swing.BoxLayout;
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.JButton;
 
 public class PrincipalGUI {
 
 	private JFrame frmReceitaFederal;
+	private JTextField txtNome;
+	private JTextField txtCpf;
+	private JTextField txtIdade;
+	private JTextField txtEndereco;
+	private JTextField txtNumFunc;
 
 	/**
 	 * Launch the application.
@@ -54,7 +61,7 @@ public class PrincipalGUI {
 	private void initialize() {
 		frmReceitaFederal = new JFrame();
 		frmReceitaFederal.setTitle("Receita Federal");
-		frmReceitaFederal.setBounds(100, 100, 650, 530);
+		frmReceitaFederal.setBounds(100, 100, 550, 530);
 		frmReceitaFederal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -68,32 +75,83 @@ public class PrincipalGUI {
 		
 		JPanel pInsertContribuinte = new JPanel();
 		tpContribuinte.addTab("Cadastrar", null, pInsertContribuinte, null);
-		pInsertContribuinte.setLayout(null);
+		pInsertContribuinte.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("151px:grow"),
+				ColumnSpec.decode("26px"),
+				ColumnSpec.decode("229px"),},
+			new RowSpec[] {
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("17px"),
+				RowSpec.decode("21px"),
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		JLabel lblCadastroDeContribuinte = new JLabel("CADASTRO DE CONTRIBUINTE");
-		lblCadastroDeContribuinte.setBounds(217, 12, 229, 17);
 		lblCadastroDeContribuinte.setFont(new Font("Dialog", Font.BOLD, 14));
-		pInsertContribuinte.add(lblCadastroDeContribuinte);
+		pInsertContribuinte.add(lblCadastroDeContribuinte, "2, 2, left, center");
 		
 		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(40, 50, 70, 15);
-		pInsertContribuinte.add(lblCpf);
+		pInsertContribuinte.add(lblCpf, "2, 4, left, center");
+		
+		txtCpf = new JTextField();
+		pInsertContribuinte.add(txtCpf, "2, 6, left, center");
+		txtCpf.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(40, 75, 70, 15);
-		pInsertContribuinte.add(lblNome);
+		pInsertContribuinte.add(lblNome, "2, 8, left, center");
+		
+		txtNome = new JTextField();
+		pInsertContribuinte.add(txtNome, "2, 10, left, center");
+		txtNome.setColumns(10);
 		
 		JLabel lblIdade = new JLabel("Idade");
-		lblIdade.setBounds(40, 102, 70, 15);
-		pInsertContribuinte.add(lblIdade);
+		pInsertContribuinte.add(lblIdade, "2, 12, left, center");
+		
+		txtIdade = new JTextField();
+		pInsertContribuinte.add(txtIdade, "2, 14, left, center");
+		txtIdade.setColumns(10);
 		
 		JLabel lblEndereo = new JLabel("Endereço");
-		lblEndereo.setBounds(40, 129, 70, 15);
-		pInsertContribuinte.add(lblEndereo);
+		pInsertContribuinte.add(lblEndereo, "2, 16, left, center");
+		
+		txtEndereco = new JTextField();
+		pInsertContribuinte.add(txtEndereco, "2, 18, left, center");
+		txtEndereco.setColumns(10);
 		
 		JLabel lblNumFuncionrios = new JLabel("Num. Funcionários");
-		lblNumFuncionrios.setBounds(40, 156, 151, 15);
-		pInsertContribuinte.add(lblNumFuncionrios);
+		pInsertContribuinte.add(lblNumFuncionrios, "2, 20, fill, center");
+		
+		txtNumFunc = new JTextField();
+		pInsertContribuinte.add(txtNumFunc, "2, 22, left, center");
+		txtNumFunc.setColumns(10);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		pInsertContribuinte.add(btnCadastrar, "2, 24, left, center");
+		
+		JButton btnLimpar = new JButton("Limpar");
+		pInsertContribuinte.add(btnLimpar, "2, 26, left, center");
 		
 		JPanel pUpdateContribuinte = new JPanel();
 		tpContribuinte.addTab("Alterar", null, pUpdateContribuinte, null);
