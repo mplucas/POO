@@ -1,0 +1,55 @@
+package apresentacao;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
+public class PrincipalGUI {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					PrincipalGUI window = new PrincipalGUI();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public PrincipalGUI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 653, 530);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane);
+		
+		JPanel paneContribuinte = new JPanel();
+		tabbedPane.addTab("Contribuinte", null, paneContribuinte, null);
+		
+		JTabbedPane tabbedPaneContribuinte = new JTabbedPane();
+		paneContribuinte.add(tabbedPaneContribuinte);
+	}
+
+}
