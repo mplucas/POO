@@ -30,7 +30,7 @@ public class PessoaJuridicaDAO {
 			sqlDelete = conex.prepareStatement(strDelete);
 			
 			String strSelect = "SELECT * FROM pessoajuridica "
-					+ "WHERE id = ?";
+					+ "WHERE id_contribuinte = ?";
 			sqlSelect = conex.prepareStatement(strSelect);
 			
 			String strUpdate = "UPDATE pessoajuridica "
@@ -114,13 +114,13 @@ public class PessoaJuridicaDAO {
 		
 	}
 	
-	public void update( PessoaJuridica pessoaJuridica ) {
+	public void update( int id, PessoaJuridica pessoaJuridica ) {
 		
 		try {
 			sqlUpdate.setString(1, pessoaJuridica.getNomePJ() );
 			sqlUpdate.setString(2, pessoaJuridica.getEndereco() );
 			sqlUpdate.setInt(3, pessoaJuridica.getNumFuncionarios() );
-			sqlUpdate.setInt(4, pessoaJuridica.getId());
+			sqlUpdate.setInt(4, id);
 			sqlUpdate.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

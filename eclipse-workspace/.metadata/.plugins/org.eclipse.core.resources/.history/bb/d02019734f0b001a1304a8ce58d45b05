@@ -116,14 +116,14 @@ public class DependenteDAO {
 		
 	}
 	
-	public void update( Dependente dependente ) {
+	public void update( int id, Dependente dependente ) {
 		
 		try {
 			sqlUpdate.setString(1, dependente.getNome() );
 			sqlUpdate.setInt(2, dependente.getIdade() );
 			sqlUpdate.setString(3, dependente.getEndereco() );
 			sqlUpdate.setInt(4, dependente.getId_contribuinte() );
-			sqlUpdate.setInt(5, dependente.getId());
+			sqlUpdate.setInt(5, id);
 			sqlUpdate.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

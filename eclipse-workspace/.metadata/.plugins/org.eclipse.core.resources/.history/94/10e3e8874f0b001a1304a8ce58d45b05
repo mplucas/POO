@@ -114,7 +114,7 @@ public class PessoaJuridicaDAO {
 		
 	}
 	
-	public void update( PessoaJuridica pessoaJuridica ) {
+	public void update( int id, PessoaJuridica pessoaJuridica ) {
 		
 		try {
 			sqlUpdate.setString(1, pessoaJuridica.getNomePJ() );

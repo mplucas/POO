@@ -84,7 +84,7 @@ public class ContribuinteDAO {
 				contribuinte.setNome(rs.getString("nome"));
 				contribuinte.setIdade(rs.getInt("idade"));
 				contribuinte.setEndereco(rs.getString("endereco"));
-				contribuinte.setContaBancaria(rs.getInt("contabancaria"));
+				contribuinte.setId_contribuinte(rs.getInt("id_contribuinte"));
 				contribuintes.add(contribuinte);
 			
 			}
@@ -98,14 +98,12 @@ public class ContribuinteDAO {
 	
 	}
 	
-	public void update( Contribuinte contribuinte ) {
+	public void update( int id, contribuinte contribuinte ) {
 		
 		try {
-			sqlUpdate.setString(1, contribuinte.getNome() );
-			sqlUpdate.setInt(2, contribuinte.getIdade() );
-			sqlUpdate.setString(3, contribuinte.getEndereco());
-			sqlUpdate.setInt(4, contribuinte.getContaBancaria());
-			sqlUpdate.setInt(5, contribuinte.getId());
+			sqlUpdate.setString(1, String.valueOf(contribuinte.getCpf()) );
+			sqlUpdate.setString(2, contribuinte.getNome() );
+			sqlUpdate.setInt(3, id);
 			sqlUpdate.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
