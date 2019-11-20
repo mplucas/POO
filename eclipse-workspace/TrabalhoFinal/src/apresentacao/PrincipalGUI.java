@@ -9,6 +9,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -17,11 +18,17 @@ import java.awt.Font;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import dados.Contribuinte;
+import negocio.GerenciarReceita;
+
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
 import javax.swing.BoxLayout;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PrincipalGUI {
 
@@ -30,7 +37,8 @@ public class PrincipalGUI {
 	private JTextField txtCpf;
 	private JTextField txtIdade;
 	private JTextField txtEndereco;
-	private JTextField txtNumFunc;
+	private JTextField txtContaBancaria;
+	private GerenciarReceita gerenciarReceita = new GerenciarReceita();
 
 	/**
 	 * Launch the application.
@@ -40,7 +48,6 @@ public class PrincipalGUI {
 			public void run() {
 				try {
 					PrincipalGUI window = new PrincipalGUI();
-					window.frmReceitaFederal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -140,14 +147,26 @@ public class PrincipalGUI {
 		pInsertContribuinte.add(txtEndereco, "2, 18, left, center");
 		txtEndereco.setColumns(10);
 		
-		JLabel lblNumFuncionrios = new JLabel("Num. Funcionários");
+		JLabel lblNumFuncionrios = new JLabel("Conta Bancária");
 		pInsertContribuinte.add(lblNumFuncionrios, "2, 20, fill, center");
 		
-		txtNumFunc = new JTextField();
-		pInsertContribuinte.add(txtNumFunc, "2, 22, left, center");
-		txtNumFunc.setColumns(10);
+		txtContaBancaria = new JTextField();
+		pInsertContribuinte.add(txtContaBancaria, "2, 22, left, center");
+		txtContaBancaria.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Contribuinte contribuinte = new Contribuinte();
+				contribuinte.setCpf(txtCpf.getText());
+				contribuinte.setNome(txtNome.getText());
+				contribuinte.setIdade(Integer.parseInt(txtIdade.getText()));
+				contribuinte.setEndereco(txtEndereco.getText());
+				contribuinte.setContaBancaria(Integer.parseInt(txtContaBancaria.getText()));
+				gerenciarReceita.insertContribuinte(contribuinte);
+				JOptionPane.showMessageDialog(null, "Cadastrado com sucesso.");
+			}
+		});
 		pInsertContribuinte.add(btnCadastrar, "2, 24, left, center");
 		
 		JButton btnLimpar = new JButton("Limpar");
@@ -200,5 +219,7 @@ public class PrincipalGUI {
 		
 		JPanel panel_15 = new JPanel();
 		tpPJ.addTab("New tab", null, panel_15, null);
+		
+		frmReceitaFederal.setVisible(true);
 	}
 }

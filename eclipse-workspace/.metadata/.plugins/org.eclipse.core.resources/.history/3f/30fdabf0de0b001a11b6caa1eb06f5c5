@@ -1,0 +1,7 @@
+package apresentacao;
+
+public class Principal {
+
+	PrincipalGUI principalGUI = new PrincipalGUI();
+	
+}
