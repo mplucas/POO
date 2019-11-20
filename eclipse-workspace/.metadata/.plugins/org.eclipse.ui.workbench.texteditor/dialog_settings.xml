@@ -6,10 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="PessoaJuridica"/>
+		<item key="selection" value="contribuinte"/>
 		<list key="findhistory">
-			<item value="Dependente"/>
 			<item value="dependente"/>
+			<item value="Dependente"/>
 			<item value="dependenteDAO"/>
 			<item value="DependenteDAO"/>
 			<item value="NotaFiscal"/>
@@ -25,6 +25,8 @@
 			<item value="ClienteDAO"/>
 		</list>
 		<list key="replacehistory">
+			<item value="contribuinte"/>
+			<item value="Contribuinte"/>
 			<item value="PessoaJuridica"/>
 			<item value="pessoaJuridica"/>
 			<item value="pessoaJuridicaDAO"/>
@@ -38,8 +40,6 @@
 			<item value="strSelContribuinte"/>
 			<item value="NotaFiscal"/>
 			<item value="notaFiscal"/>
-			<item value="notaFiscalDAO"/>
-			<item value="NotaFiscalDAO"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

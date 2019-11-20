@@ -14,7 +14,6 @@ public class PessoaJuridicaDAO {
 	private PreparedStatement sqlInsert;
 	private PreparedStatement sqlDelete;
 	private PreparedStatement sqlSelect;
-	private PreparedStatement sqlSelectAll;
 	private PreparedStatement sqlUpdate;
 	
 	private PessoaJuridicaDAO(){
@@ -33,10 +32,6 @@ public class PessoaJuridicaDAO {
 			String strSelect = "SELECT * FROM pessoajuridica "
 					+ "WHERE id = ?";
 			sqlSelect = conex.prepareStatement(strSelect);
-			
-			String strSelectAll = "SELECT * FROM pessoajuridica "
-					+ "WHERE id = ?";
-			sqlSelectAll = conex.prepareStatement(strSelectAll);
 			
 			String strUpdate = "UPDATE pessoajuridica "
 					+ "SET nomepj = ?, endereco = ?, numfuncionarios = ?"
@@ -106,14 +101,15 @@ public class PessoaJuridicaDAO {
 	
 	}
 	
-	public ArrayList<PessoaJuridica> selectAll() {
+	public ArrayList<PessoaJuridica> select(int id) {
 		
 		ArrayList<PessoaJuridica> pessoaJuridicas = new ArrayList<PessoaJuridica>();
 		PessoaJuridica pessoaJuridica = null;
 		
 		try {
 		
-			ResultSet rs = sqlSelectAll.executeQuery();
+			sqlSelect.setInt(1, id);
+			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
 			

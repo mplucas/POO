@@ -72,44 +72,15 @@ public class ContribuinteDAO {
 	
 	}
 	
-	public Contribuinte select(int id) {
-		
-		Contribuinte contribuinte = null;
-		
-		try {
-		
-			sqlSelect.setInt(1, id);
-			ResultSet rs = sqlSelect.executeQuery();
-			
-			if(rs.next()) {
-			
-				contribuinte = new Contribuinte();
-				contribuinte.setId(rs.getInt("id"));
-				contribuinte.setCpf(rs.getString("cpf"));
-				contribuinte.setNome(rs.getString("nome"));
-				contribuinte.setIdade(rs.getInt("idade"));
-				contribuinte.setEndereco(rs.getString("endereco"));
-				contribuinte.setContaBancaria(rs.getInt("contabancaria"));
-			
-			}
-		}catch(SQLException e) {
-		
-			e.printStackTrace();
-		
-		}
-		
-		return contribuinte;
-	
-	}
-	
-	public ArrayList<Contribuinte> selectAll() {
+	public ArrayList<Contribuinte> select(int id_contribuinte) {
 		
 		ArrayList<Contribuinte> contribuintes = new ArrayList<Contribuinte>();
 		Contribuinte contribuinte = null;
 		
 		try {
 		
-			ResultSet rs = sqlSelectAll.executeQuery();
+			sqlSelect.setInt(1, id_contribuinte);
+			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
 			

@@ -109,7 +109,8 @@ public class ContribuinteDAO {
 		
 		try {
 		
-			ResultSet rs = sqlSelectAll.executeQuery();
+			sqlSelect.setInt(1, id_contribuinte);
+			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
 			

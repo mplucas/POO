@@ -109,7 +109,7 @@ public class ContribuinteDAO {
 		
 		try {
 		
-			ResultSet rs = sqlSelectAll.executeQuery();
+			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
 			

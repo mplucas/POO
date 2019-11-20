@@ -113,7 +113,8 @@ public class PessoaJuridicaDAO {
 		
 		try {
 		
-			ResultSet rs = sqlSelectAll.executeQuery();
+			sqlSelect.setInt(1, id);
+			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
 			

@@ -72,13 +72,14 @@ public class ContribuinteDAO {
 	
 	}
 	
-	public Contribuinte select(int id) {
+	public ArrayList<Contribuinte> select(int id_contribuinte) {
 		
+		ArrayList<Contribuinte> contribuintes = new ArrayList<Contribuinte>();
 		Contribuinte contribuinte = null;
 		
 		try {
 		
-			sqlSelect.setInt(1, id);
+			sqlSelect.setInt(1, id_contribuinte);
 			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
@@ -90,6 +91,7 @@ public class ContribuinteDAO {
 				contribuinte.setIdade(rs.getInt("idade"));
 				contribuinte.setEndereco(rs.getString("endereco"));
 				contribuinte.setContaBancaria(rs.getInt("contabancaria"));
+				contribuintes.add(contribuinte);
 			
 			}
 		}catch(SQLException e) {
@@ -98,7 +100,7 @@ public class ContribuinteDAO {
 		
 		}
 		
-		return contribuinte;
+		return contribuintes;
 	
 	}
 	
@@ -109,7 +111,8 @@ public class ContribuinteDAO {
 		
 		try {
 		
-			ResultSet rs = sqlSelectAll.executeQuery();
+			sqlSelect.setInt(1, id_contribuinte);
+			ResultSet rs = sqlSelect.executeQuery();
 			
 			if(rs.next()) {
 			
