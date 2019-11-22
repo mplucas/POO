@@ -757,7 +757,5 @@ public class PrincipalGUI {
 		
 		JButton btnExcluir = new JButton("Excluir");
 		pDeletePJ.add(btnExcluir, "2, 4, left, center");
-		
-		frmReceitaFederal.setVisible(true);
 	}
 }
