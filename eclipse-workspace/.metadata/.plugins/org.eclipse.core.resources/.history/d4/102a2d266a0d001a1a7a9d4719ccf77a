@@ -1,0 +1,91 @@
+package apresentacao;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JList;
+import javax.swing.JTextArea;
+
+public class BensGUI {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BensGUI window = new BensGUI();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public BensGUI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 580, 450);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
+		JPanel pBemInsert = new JPanel();
+		tabbedPane.addTab("New tab", null, pBemInsert, null);
+		
+		JPanel pBemSelect = new JPanel();
+		tabbedPane.addTab("Consultar", null, pBemSelect, null);
+		pBemSelect.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("250px:grow"),
+				RowSpec.decode("30px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
+		
+		JLabel lblCadastro = new JLabel("Consultar Bem");
+		lblCadastro.setFont(new Font("Dialog", Font.BOLD, 14));
+		pBemSelect.add(lblCadastro, "2, 2");
+		
+		JLabel lblDados = new JLabel("Dados:");
+		pBemSelect.add(lblDados, "4, 2");
+		
+		JList listBemSelect = new JList();
+		pBemSelect.add(listBemSelect, "2, 3, fill, fill");
+		
+		JTextArea txtBemSelect = new JTextArea();
+		pBemSelect.add(txtBemSelect, "4, 3, fill, fill");
+		
+		JPanel pBemDelete = new JPanel();
+		tabbedPane.addTab("New tab", null, pBemDelete, null);
+	}
+
+}
