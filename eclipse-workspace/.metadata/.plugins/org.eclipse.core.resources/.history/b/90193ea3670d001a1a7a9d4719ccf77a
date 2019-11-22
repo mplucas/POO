@@ -1,0 +1,886 @@
+package apresentacao;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Font;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import dados.Contribuinte;
+import negocio.GerenciarReceita;
+
+import java.awt.FlowLayout;
+import java.awt.CardLayout;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.JTextArea;
+
+public class PrincipalGUI {
+
+	private JFrame frmReceitaFederal;
+	private JTextField txtCadastroInsertNome;
+	private JTextField txtCadastroInsertCpf;
+	private JTextField txtCadastroInsertIdade;
+	private JTextField txtCadastroInsertEndereco;
+	private JTextField txtCadastroInsertContaBancaria;
+	private GerenciarReceita gerenciarReceita = new GerenciarReceita();
+	private JTextField txtContribuinteUpdateNome;
+	private JTextField txtContribuinteUpdateIdade;
+	private JTextField txtContribuinteUpdateContaBanc;
+	private JTextField txtContribuinteUpdateEndereco;
+	private JTextField txtReceitaNumProtocolo;
+	private JTextField txtReceitaCNPJ;
+	private JTextField txtReceitaValor;
+	private JTextField txtDespesaNumProtocolo;
+	private JTextField txtDespesaCNPJ;
+	private JTextField txtDespesaValor;
+	private JTextField txtPJInsertCnpj;
+	private JTextField txtPJInsertNome;
+	private JTextField txtPJInsertEndereco;
+	private JTextField txtPJInsertNumFuncionarios;
+	private JTextField txtPJUpdateNome;
+	private JTextField txtPJUpdateEndereco;
+	private JTextField txtPJUpdateNumFuncionarios;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					PrincipalGUI window = new PrincipalGUI();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public PrincipalGUI() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmReceitaFederal = new JFrame();
+		frmReceitaFederal.setTitle("Receita Federal");
+		frmReceitaFederal.setBounds(100, 100, 550, 490);
+		frmReceitaFederal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmReceitaFederal.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("550px"),},
+			new RowSpec[] {
+				RowSpec.decode("460px"),}));
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		frmReceitaFederal.getContentPane().add(tabbedPane, "1, 1, fill, fill");
+		
+		JTabbedPane tpContribuinte = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Contribuinte", null, tpContribuinte, null);
+		
+		DefaultListModel mSelectContribuinte = new DefaultListModel();
+		ArrayList<Contribuinte> aContribuinte = new ArrayList<Contribuinte>();
+		
+		JPanel pInsertContribuinte = new JPanel();
+		tpContribuinte.addTab("Cadastrar", null, pInsertContribuinte, null);
+		pInsertContribuinte.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("300px"),
+				ColumnSpec.decode("25px"),
+				ColumnSpec.decode("230px"),},
+			new RowSpec[] {
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("17px"),
+				RowSpec.decode("21px"),
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("15px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblCadastroDeContribuinte = new JLabel("CADASTRO DE CONTRIBUINTE");
+		lblCadastroDeContribuinte.setFont(new Font("Dialog", Font.BOLD, 14));
+		pInsertContribuinte.add(lblCadastroDeContribuinte, "2, 2, left, center");
+		
+		JLabel lblCpf = new JLabel("CPF");
+		pInsertContribuinte.add(lblCpf, "2, 4, left, center");
+		
+		txtCadastroInsertCpf = new JTextField();
+		pInsertContribuinte.add(txtCadastroInsertCpf, "2, 6, left, center");
+		txtCadastroInsertCpf.setColumns(10);
+		
+		JLabel lblNome = new JLabel("Nome");
+		pInsertContribuinte.add(lblNome, "2, 8, left, center");
+		
+		txtCadastroInsertNome = new JTextField();
+		pInsertContribuinte.add(txtCadastroInsertNome, "2, 10, left, center");
+		txtCadastroInsertNome.setColumns(10);
+		
+		JLabel lblIdade = new JLabel("Idade");
+		pInsertContribuinte.add(lblIdade, "2, 12, left, center");
+		
+		txtCadastroInsertIdade = new JTextField();
+		pInsertContribuinte.add(txtCadastroInsertIdade, "2, 14, left, center");
+		txtCadastroInsertIdade.setColumns(10);
+		
+		JLabel lblEndereo = new JLabel("Endereço");
+		pInsertContribuinte.add(lblEndereo, "2, 16, left, center");
+		
+		txtCadastroInsertEndereco = new JTextField();
+		pInsertContribuinte.add(txtCadastroInsertEndereco, "2, 18, left, center");
+		txtCadastroInsertEndereco.setColumns(10);
+		
+		JLabel lblNumFuncionrios = new JLabel("Conta Bancária");
+		pInsertContribuinte.add(lblNumFuncionrios, "2, 20, fill, center");
+		
+		txtCadastroInsertContaBancaria = new JTextField();
+		pInsertContribuinte.add(txtCadastroInsertContaBancaria, "2, 22, left, center");
+		txtCadastroInsertContaBancaria.setColumns(10);
+		
+		JButton btnContribuinteCadastrar = new JButton("Cadastrar");
+		btnContribuinteCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Contribuinte contribuinte = new Contribuinte();
+				contribuinte.setCpf(txtCadastroInsertCpf.getText());
+				contribuinte.setNome(txtCadastroInsertNome.getText());
+				contribuinte.setIdade(Integer.parseInt(txtCadastroInsertIdade.getText()));
+				contribuinte.setEndereco(txtCadastroInsertEndereco.getText());
+				contribuinte.setContaBancaria(Integer.parseInt(txtCadastroInsertContaBancaria.getText()));
+				gerenciarReceita.insertContribuinte(contribuinte);
+				JOptionPane.showMessageDialog(null, "Cadastrado com sucesso.");
+			}
+		});
+		pInsertContribuinte.add(btnContribuinteCadastrar, "2, 24, left, center");
+		
+		JButton btnContribuinteLimpar = new JButton("Limpar");
+		btnContribuinteLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtCadastroInsertCpf.setText("");
+				txtCadastroInsertNome.setText("");
+				txtCadastroInsertIdade.setText("");
+				txtCadastroInsertEndereco.setText("");
+				txtCadastroInsertContaBancaria.setText("");
+			}
+		});
+		pInsertContribuinte.add(btnContribuinteLimpar, "2, 26, left, center");
+		
+		JPanel pSelectContribuinte = new JPanel();
+		tpContribuinte.addTab("Consultar", null, pSelectContribuinte, null);
+		pSelectContribuinte.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("250px:grow"),
+				RowSpec.decode("30px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblConsultaDeContribuinte = new JLabel("CONSULTA DE CONTRIBUINTE");
+		lblConsultaDeContribuinte.setFont(new Font("Dialog", Font.BOLD, 14));
+		pSelectContribuinte.add(lblConsultaDeContribuinte, "2, 2");
+		
+		JLabel lblContribuinteDados = new JLabel("Dados:");
+		pSelectContribuinte.add(lblContribuinteDados, "4, 2, left, center");
+		JList listContribuinte = new JList( mSelectContribuinte );
+		pSelectContribuinte.add(listContribuinte, "2, 3, fill, fill");
+		
+		JTextArea txtContribuinte = new JTextArea();
+		txtContribuinte.setEditable(false);
+		pSelectContribuinte.add(txtContribuinte, "4, 3, fill, fill");
+		
+		JButton btnVerificarBens = new JButton("Verificar Bens");
+		pSelectContribuinte.add(btnVerificarBens, "2, 4");
+		
+		JButton btnVerificarDependentes = new JButton("Verificar Dependentes");
+		pSelectContribuinte.add(btnVerificarDependentes, "2, 6");
+				
+		JPanel pUpdateContribuinte = new JPanel();
+		tpContribuinte.addTab("Alterar", null, pUpdateContribuinte, null);
+		pUpdateContribuinte.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("220px:grow"),
+				ColumnSpec.decode("25px"),
+				ColumnSpec.decode("230px"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("19px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("25px"),
+				FormSpecs.LINE_GAP_ROWSPEC,
+				RowSpec.decode("25px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblAlterarContribuinte = new JLabel("ALTERAR CONTRIBUINTE");
+		lblAlterarContribuinte.setFont(new Font("Dialog", Font.BOLD, 14));
+		pUpdateContribuinte.add(lblAlterarContribuinte, "2, 2, fill, center");
+		
+		JLabel lblContribuintes = new JLabel("Contribuintes");
+		pUpdateContribuinte.add(lblContribuintes, "2, 4");
+		
+		JList listUpdateContribuintes = new JList( mSelectContribuinte );
+		pUpdateContribuinte.add(listUpdateContribuintes, "2, 6, fill, fill");
+		
+		JPanel pUpdateContribuinteForm = new JPanel();
+		pUpdateContribuinte.add(pUpdateContribuinteForm, "4, 6, fill, fill");
+		pUpdateContribuinteForm.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel label_1 = new JLabel("Nome");
+		pUpdateContribuinteForm.add(label_1, "2, 2");
+		
+		txtContribuinteUpdateNome = new JTextField();
+		pUpdateContribuinteForm.add(txtContribuinteUpdateNome, "2, 4");
+		txtContribuinteUpdateNome.setColumns(10);
+		
+		JLabel label_2 = new JLabel("Idade");
+		pUpdateContribuinteForm.add(label_2, "2, 6");
+		
+		txtContribuinteUpdateIdade = new JTextField();
+		pUpdateContribuinteForm.add(txtContribuinteUpdateIdade, "2, 8");
+		txtContribuinteUpdateIdade.setColumns(10);
+		
+		JLabel label_3 = new JLabel("Endereço");
+		pUpdateContribuinteForm.add(label_3, "2, 10");
+		
+		txtContribuinteUpdateEndereco = new JTextField();
+		pUpdateContribuinteForm.add(txtContribuinteUpdateEndereco, "2, 12");
+		txtContribuinteUpdateEndereco.setColumns(10);
+		
+		JLabel label_4 = new JLabel("Conta Bancária");
+		pUpdateContribuinteForm.add(label_4, "2, 14");
+		
+		txtContribuinteUpdateContaBanc = new JTextField();
+		pUpdateContribuinteForm.add(txtContribuinteUpdateContaBanc, "2, 16");
+		txtContribuinteUpdateContaBanc.setColumns(10);
+		
+		JButton btnContribuinteAlterar = new JButton("Alterar");
+		btnContribuinteAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int iSelecionado = listUpdateContribuintes.getSelectedIndex();
+				if(iSelecionado >= 0) {
+					Contribuinte contribuinteAlterado = aContribuinte.get(iSelecionado);
+					contribuinteAlterado.setNome(txtContribuinteUpdateNome);
+					contribuinteAlterado.setIdade(txtContribuinteUpdateIdade);
+					contribuinteAlterado.setEndereco(txtContribuinteUpdateNome);
+					contribuinteAlterado.setNome(txtContribuinteUpdateNome);
+					gerenciarReceita.updateContribuinte(aContribuinte.get(iSelecionado));
+					JOptionPane.showMessageDialog(null, "Alterado com sucesso.");
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecione um Contribuinte para ser alterado.");
+				}
+			}
+		});
+		pUpdateContribuinteForm.add(btnContribuinteAlterar, "2, 18");
+		
+		JButton btnContribuinteAlterarLimpar = new JButton("Limpar");
+		btnContribuinteAlterarLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtContribuinteUpdateNome.setText("");
+				txtContribuinteUpdateIdade.setText("");
+				txtContribuinteUpdateEndereco.setText("");
+				txtContribuinteUpdateContaBanc.setText("");
+			}
+		});
+		pUpdateContribuinteForm.add(btnContribuinteAlterarLimpar, "2, 20");
+		
+		JTabbedPane tpReceita = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Receitas", null, tpReceita, null);
+		
+		JPanel pInsertReceita = new JPanel();
+		tpReceita.addTab("Cadastrar", null, pInsertReceita, null);
+		pInsertReceita.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblCadastroDeReceitas = new JLabel("CADASTRO DE RECEITAS");
+		lblCadastroDeReceitas.setFont(new Font("Dialog", Font.BOLD, 14));
+		pInsertReceita.add(lblCadastroDeReceitas, "2, 2, left, center");
+		
+		JLabel lblNum = new JLabel("Núm.  Protocolo");
+		pInsertReceita.add(lblNum, "2, 6");
+		
+		txtReceitaNumProtocolo = new JTextField();
+		pInsertReceita.add(txtReceitaNumProtocolo, "2, 8, left, center");
+		txtReceitaNumProtocolo.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("CNPJ");
+		pInsertReceita.add(lblNewLabel, "2, 10");
+		
+		txtReceitaCNPJ = new JTextField();
+		pInsertReceita.add(txtReceitaCNPJ, "2, 12, left, center");
+		txtReceitaCNPJ.setColumns(10);
+		
+		JLabel lblValor = new JLabel("Valor");
+		pInsertReceita.add(lblValor, "2, 14");
+		
+		txtReceitaValor = new JTextField();
+		pInsertReceita.add(txtReceitaValor, "2, 16, left, center");
+		txtReceitaValor.setColumns(10);
+		
+		JButton btnReceitaCadastrar = new JButton("Cadastrar");
+		pInsertReceita.add(btnReceitaCadastrar, "2, 18, left, center");
+		
+		JButton btnReceitaLimpar = new JButton("Limpar");
+		pInsertReceita.add(btnReceitaLimpar, "2, 20, left, center");
+		
+		JPanel pSelectReceita = new JPanel();
+		tpReceita.addTab("Consultar", null, pSelectReceita, null);
+		pSelectReceita.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("125px"),
+				RowSpec.decode("30px"),
+				RowSpec.decode("125px"),}));
+		
+		JLabel lblConsultarReceita = new JLabel("CONSULTAR RECEITA");
+		lblConsultarReceita.setFont(new Font("Dialog", Font.BOLD, 14));
+		pSelectReceita.add(lblConsultarReceita, "2, 2");
+		
+		JLabel lblContribuinte_1 = new JLabel("Contribuinte:");
+		pSelectReceita.add(lblContribuinte_1, "2, 3, left, center");
+		
+		JLabel lblDados_1 = new JLabel("Dados:");
+		pSelectReceita.add(lblDados_1, "4, 3");
+		
+		JList listReceitaContribuinte = new JList();
+		pSelectReceita.add(listReceitaContribuinte, "2, 4, fill, fill");
+		
+		JLabel lblReceitaDados = new JLabel("");
+		pSelectReceita.add(lblReceitaDados, "4, 4");
+		
+		JLabel lblReceitas = new JLabel("Receitas:");
+		pSelectReceita.add(lblReceitas, "2, 5");
+		
+		JList listReceita = new JList();
+		pSelectReceita.add(listReceita, "2, 6, fill, fill");
+		
+		JPanel pDeleteReceita = new JPanel();
+		tpReceita.addTab("Excluir", null, pDeleteReceita, null);
+		pDeleteReceita.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("250px"),
+				RowSpec.decode("30px"),}));
+		
+		JLabel lblExcluirReceitas = new JLabel("EXCLUIR RECEITAS");
+		lblExcluirReceitas.setFont(new Font("Dialog", Font.BOLD, 14));
+		pDeleteReceita.add(lblExcluirReceitas, "2, 2");
+		
+		JList listReceitaExcluir = new JList();
+		pDeleteReceita.add(listReceitaExcluir, "2, 3, fill, fill");
+		
+		JButton btnReceitaExcluir = new JButton("Excluir");
+		pDeleteReceita.add(btnReceitaExcluir, "2, 4, left, center");
+		
+		JTabbedPane tpDespesa = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Despesas", null, tpDespesa, null);
+		
+		JPanel pInsertDespesa = new JPanel();
+		tpDespesa.addTab("Cadastrar", null, pInsertDespesa, null);
+		pInsertDespesa.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblCadastroDeDespesas = new JLabel("CADASTRO DE DESPESAS");
+		lblCadastroDeDespesas.setFont(new Font("Dialog", Font.BOLD, 14));
+		pInsertDespesa.add(lblCadastroDeDespesas, "4, 2");
+		
+		JLabel label_5 = new JLabel("Núm.  Protocolo");
+		pInsertDespesa.add(label_5, "4, 6");
+		
+		txtDespesaNumProtocolo = new JTextField();
+		txtDespesaNumProtocolo.setColumns(10);
+		pInsertDespesa.add(txtDespesaNumProtocolo, "4, 8, left, center");
+		
+		JLabel label_6 = new JLabel("CNPJ");
+		pInsertDespesa.add(label_6, "4, 10");
+		
+		txtDespesaCNPJ = new JTextField();
+		txtDespesaCNPJ.setColumns(10);
+		pInsertDespesa.add(txtDespesaCNPJ, "4, 12, left, center");
+		
+		JLabel lblValor_1 = new JLabel("Valor");
+		pInsertDespesa.add(lblValor_1, "4, 14");
+		
+		txtDespesaValor = new JTextField();
+		txtDespesaValor.setColumns(10);
+		pInsertDespesa.add(txtDespesaValor, "4, 16, left, center");
+		
+		JButton btnDespesaCadastrar = new JButton("Cadastrar");
+		pInsertDespesa.add(btnDespesaCadastrar, "4, 18, left, center");
+		
+		JButton btnBtnDespesaLimpar = new JButton("Limpar");
+		pInsertDespesa.add(btnBtnDespesaLimpar, "4, 20, left, center");
+		
+		JPanel pSelectDespesa = new JPanel();
+		tpDespesa.addTab("Consultar", null, pSelectDespesa, null);
+		pSelectDespesa.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("125px"),
+				RowSpec.decode("30px"),
+				RowSpec.decode("125px"),}));
+		
+		JLabel lblConsultaDespesa = new JLabel("CONSULTA DESPESA");
+		lblConsultaDespesa.setFont(new Font("Dialog", Font.BOLD, 14));
+		pSelectDespesa.add(lblConsultaDespesa, "2, 2");
+		
+		JLabel lblContribuinte_2 = new JLabel("Contribuinte");
+		pSelectDespesa.add(lblContribuinte_2, "2, 3");
+		
+		JLabel lblDados = new JLabel("Dados:");
+		pSelectDespesa.add(lblDados, "4, 3");
+		
+		JList listDespesaContribuinte = new JList();
+		pSelectDespesa.add(listDespesaContribuinte, "2, 4, fill, fill");
+		
+		JLabel lblDespesaDados = new JLabel("");
+		pSelectDespesa.add(lblDespesaDados, "4, 4");
+		
+		JLabel lblDespesas = new JLabel("Despesas");
+		pSelectDespesa.add(lblDespesas, "2, 5");
+		
+		JList listDespesa = new JList();
+		pSelectDespesa.add(listDespesa, "2, 6, fill, fill");
+		
+		JPanel pDeleteDespesa = new JPanel();
+		tpDespesa.addTab("Excluir", null, pDeleteDespesa, null);
+		pDeleteDespesa.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("250px"),
+				RowSpec.decode("30px:grow"),}));
+		
+		JLabel label_7 = new JLabel("EXCLUIR RECEITAS");
+		label_7.setFont(new Font("Dialog", Font.BOLD, 14));
+		pDeleteDespesa.add(label_7, "2, 2");
+		
+		JList listDespesaDelete = new JList();
+		pDeleteDespesa.add(listDespesaDelete, "2, 3, fill, fill");
+		
+		JButton btnDespesaDelete = new JButton("Excluir");
+		pDeleteDespesa.add(btnDespesaDelete, "2, 4, left, center");
+		
+		JTabbedPane tpPJ = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Pessoa Jurídica", null, tpPJ, null);
+		
+		JPanel pInsertPJ = new JPanel();
+		tpPJ.addTab("Cadastrar", null, pInsertPJ, null);
+		pInsertPJ.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblCadastroPessoaJurdica = new JLabel("CADASTRO PESSOA JURÍDICA");
+		lblCadastroPessoaJurdica.setFont(new Font("Dialog", Font.BOLD, 14));
+		pInsertPJ.add(lblCadastroPessoaJurdica, "4, 4, left, center");
+		
+		JLabel lblCnpj = new JLabel("CNPJ");
+		pInsertPJ.add(lblCnpj, "4, 6");
+		
+		txtPJInsertCnpj = new JTextField();
+		pInsertPJ.add(txtPJInsertCnpj, "4, 8, left, center");
+		txtPJInsertCnpj.setColumns(10);
+		
+		JLabel lblNome_1 = new JLabel("Nome");
+		pInsertPJ.add(lblNome_1, "4, 10");
+		
+		txtPJInsertNome = new JTextField();
+		pInsertPJ.add(txtPJInsertNome, "4, 12, left, center");
+		txtPJInsertNome.setColumns(10);
+		
+		JLabel lblEndereo_1 = new JLabel("Endereço");
+		pInsertPJ.add(lblEndereo_1, "4, 14");
+		
+		txtPJInsertEndereco = new JTextField();
+		pInsertPJ.add(txtPJInsertEndereco, "4, 16, left, center");
+		txtPJInsertEndereco.setColumns(10);
+		
+		JLabel lblNmFuncionrios = new JLabel("Núm. Funcionários");
+		pInsertPJ.add(lblNmFuncionrios, "4, 18");
+		
+		txtPJInsertNumFuncionarios = new JTextField();
+		pInsertPJ.add(txtPJInsertNumFuncionarios, "4, 20, left, default");
+		txtPJInsertNumFuncionarios.setColumns(10);
+		
+		JButton btnPJCadastrar = new JButton("Cadastrar");
+		pInsertPJ.add(btnPJCadastrar, "4, 22, left, center");
+		
+		JButton btnPJInsertLimpar = new JButton("Limpar");
+		pInsertPJ.add(btnPJInsertLimpar, "4, 24, left, center");
+		
+		JPanel pSelectPJ = new JPanel();
+		tpPJ.addTab("Consultar", null, pSelectPJ, null);
+		pSelectPJ.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("30px"),
+				ColumnSpec.decode("230px"),
+				ColumnSpec.decode("30px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("40px"),
+				RowSpec.decode("30px"),
+				RowSpec.decode("205px:grow"),}));
+		
+		JLabel lblConsultaDePessoa = new JLabel("CONSULTA PESSOA JURÍDICA");
+		lblConsultaDePessoa.setFont(new Font("Dialog", Font.BOLD, 14));
+		pSelectPJ.add(lblConsultaDePessoa, "2, 2");
+		
+		JLabel lblPessoaJurdica = new JLabel("Pessoa Jurídica:");
+		pSelectPJ.add(lblPessoaJurdica, "2, 3");
+		
+		JList listPJ = new JList();
+		pSelectPJ.add(listPJ, "2, 4, fill, fill");
+		
+		JLabel lblNotasFiscais = new JLabel("Notas Fiscais:");
+		pSelectPJ.add(lblNotasFiscais, "2, 5");
+		
+		JLabel lblContraCheques = new JLabel("Contra Cheques:");
+		pSelectPJ.add(lblContraCheques, "4, 5");
+		
+		JList listPJNF = new JList();
+		pSelectPJ.add(listPJNF, "2, 6, fill, fill");
+		
+		JList listPJContraCheque = new JList();
+		pSelectPJ.add(listPJContraCheque, "4, 6, fill, fill");
+		
+		JPanel pUpdatePJ = new JPanel();
+		tpPJ.addTab("Alterar", null, pUpdatePJ, null);
+		pUpdatePJ.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.RELATED_GAP_COLSPEC,
+				FormSpecs.DEFAULT_COLSPEC,
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				FormSpecs.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblAlterarPessoaJurdica = new JLabel("ALTERAR PESSOA JURÍDICA");
+		lblAlterarPessoaJurdica.setFont(new Font("Dialog", Font.BOLD, 14));
+		pUpdatePJ.add(lblAlterarPessoaJurdica, "4, 4");
+		
+		JLabel lblNome_2 = new JLabel("Nome");
+		pUpdatePJ.add(lblNome_2, "4, 6");
+		
+		txtPJUpdateNome = new JTextField();
+		pUpdatePJ.add(txtPJUpdateNome, "4, 8, left, center");
+		txtPJUpdateNome.setColumns(10);
+		
+		JLabel lblEndereco = new JLabel("Endereco");
+		pUpdatePJ.add(lblEndereco, "4, 10");
+		
+		txtPJUpdateEndereco = new JTextField();
+		pUpdatePJ.add(txtPJUpdateEndereco, "4, 12, left, center");
+		txtPJUpdateEndereco.setColumns(10);
+		
+		JLabel lblNmFuncionrios_1 = new JLabel("Núm. Funcionários");
+		pUpdatePJ.add(lblNmFuncionrios_1, "4, 14");
+		
+		txtPJUpdateNumFuncionarios = new JTextField();
+		pUpdatePJ.add(txtPJUpdateNumFuncionarios, "4, 16, left, center");
+		txtPJUpdateNumFuncionarios.setColumns(10);
+		
+		JButton btnPJAlterar = new JButton("Alterar");
+		pUpdatePJ.add(btnPJAlterar, "4, 18, left, center");
+		
+		JButton btnPJUpdateLimpar = new JButton("Limpar");
+		pUpdatePJ.add(btnPJUpdateLimpar, "4, 20, left, center");
+		
+		JPanel pDeletePJ = new JPanel();
+		tpPJ.addTab("Excluir", null, pDeletePJ, null);
+		pDeletePJ.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("200px"),},
+			new RowSpec[] {
+				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("30px"),
+				RowSpec.decode("250px"),
+				RowSpec.decode("40px"),}));
+		
+		JLabel lblExcluirPessoaJurdica = new JLabel("EXCLUIR PESSOA JURÍDICA");
+		lblExcluirPessoaJurdica.setFont(new Font("Dialog", Font.BOLD, 14));
+		pDeletePJ.add(lblExcluirPessoaJurdica, "2, 2");
+		
+		JList listPJDelete = new JList();
+		pDeletePJ.add(listPJDelete, "2, 3, fill, fill");
+		
+		JButton btnExcluir = new JButton("Excluir");
+		pDeletePJ.add(btnExcluir, "2, 4, left, center");
+		
+		// Refresh de listas
+		// Contribuinte
+		tpContribuinte.addChangeListener(new ChangeListener() {
+	        public void stateChanged(ChangeEvent e) {
+	            if(tpContribuinte.getSelectedIndex() == 1 || tpContribuinte.getSelectedIndex() == 2) {
+	            	mSelectContribuinte.clear();
+	            	aContribuinte.clear();
+	            	aContribuinte.addAll(gerenciarReceita.selectAllContribuinte());
+	            	for(Contribuinte val : aContribuinte)
+	                    mSelectContribuinte.addElement(val);
+	            }
+	        }
+	    });
+		listContribuinte.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (!arg0.getValueIsAdjusting()) {
+                	int iSelectionado = listContribuinte.getSelectedIndex();
+                	if(iSelectionado >= 0 && iSelectionado < aContribuinte.size()) {
+                		Contribuinte aux = aContribuinte.get(iSelectionado);
+                		String sAux = "CPF: " + aux.getCpf() + "\nNome: " + aux.getNome() + "\nIdade: " + aux.getIdade();
+                		sAux += "\nEndereço: " + aux.getEndereco() + "\nConta Bancária: " + aux.getContaBancaria();
+                		txtContribuinte.setText(sAux);
+                	}
+                }
+            }
+        });
+		listUpdateContribuintes.addListSelectionListener(new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (!arg0.getValueIsAdjusting()) {
+                	int iSelectionado = listUpdateContribuintes.getSelectedIndex();
+                	if(iSelectionado >= 0 && iSelectionado < aContribuinte.size()) {
+                		Contribuinte aux = aContribuinte.get(iSelectionado);
+                		txtContribuinteUpdateNome.setText(aux.getNome());
+                		txtContribuinteUpdateIdade.setText(String.valueOf(aux.getIdade()));
+                		txtContribuinteUpdateEndereco.setText(aux.getEndereco());
+                		txtContribuinteUpdateContaBanc.setText(String.valueOf(aux.getContaBancaria()));
+                	}
+                }
+            }
+        });
+		
+		frmReceitaFederal.setVisible(true);
+	}
+}

@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.ArrayList;
+
 import dados.Contribuinte;
 import persistencia.ContribuinteDAO;
 
@@ -8,6 +10,18 @@ public class GerenciarReceita {
 	public void insertContribuinte(Contribuinte contribuinte) {
 		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
 		contribuinteDAO.insert(contribuinte);
+	}
+	
+	public ArrayList<Contribuinte> selectAllContribuinte() {
+		
+		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
+		return contribuinteDAO.selectAll();
+		
+	}
+	
+	public void updateContribuinte(Contribuinte contribuinte) {
+		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
+		contribuinteDAO.update(contribuinte);
 	}
 	
 }

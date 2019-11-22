@@ -102,4 +102,9 @@ public class Contribuinte {
 		this.receitas = receitas;
 	}
 	
+	@Override
+	public String toString() {
+		return cpf + " - " + nome;
+	}
+	
 }

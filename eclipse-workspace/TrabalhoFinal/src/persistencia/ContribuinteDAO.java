@@ -111,7 +111,7 @@ public class ContribuinteDAO {
 		
 			ResultSet rs = sqlSelectAll.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 			
 				contribuinte = new Contribuinte();
 				contribuinte.setId(rs.getInt("id"));
