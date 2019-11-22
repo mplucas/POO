@@ -44,12 +44,9 @@ public class PrincipalGUI {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField txtReceitaNumProtocolo;
-	private JTextField txtReceitaCNPJ;
-	private JTextField txtReceitaValor;
-	private JTextField txtDespesaNumProtocolo;
-	private JTextField txtDespesaCNPJ;
-	private JTextField txtDespesaValor;
+	private JTextField txtNumProtocoloReceita;
+	private JTextField txtCnpjReceita;
+	private JTextField txtValorReceita;
 
 	/**
 	 * Launch the application.
@@ -81,13 +78,9 @@ public class PrincipalGUI {
 		frmReceitaFederal.setTitle("Receita Federal");
 		frmReceitaFederal.setBounds(100, 100, 550, 490);
 		frmReceitaFederal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmReceitaFederal.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("550px"),},
-			new RowSpec[] {
-				RowSpec.decode("460px"),}));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frmReceitaFederal.getContentPane().add(tabbedPane, "1, 1, fill, fill");
+		frmReceitaFederal.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		JTabbedPane tpContribuinte = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Contribuinte", null, tpContribuinte, null);
@@ -130,7 +123,7 @@ public class PrincipalGUI {
 		tpContribuinte.addTab("Cadastrar", null, pInsertContribuinte, null);
 		pInsertContribuinte.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("300px"),
+				ColumnSpec.decode("300px:grow"),
 				ColumnSpec.decode("25px"),
 				ColumnSpec.decode("230px"),},
 			new RowSpec[] {
@@ -355,7 +348,7 @@ public class PrincipalGUI {
 		tpReceita.addTab("Cadastrar", null, pInsertReceita, null);
 		pInsertReceita.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("250px"),
+				ColumnSpec.decode("300px:grow"),
 				ColumnSpec.decode("40px"),
 				ColumnSpec.decode("200px"),},
 			new RowSpec[] {
@@ -387,23 +380,23 @@ public class PrincipalGUI {
 		JLabel lblNum = new JLabel("Núm.  Protocolo");
 		pInsertReceita.add(lblNum, "2, 6");
 		
-		txtReceitaNumProtocolo = new JTextField();
-		pInsertReceita.add(txtReceitaNumProtocolo, "2, 8, left, center");
-		txtReceitaNumProtocolo.setColumns(10);
+		txtNumProtocoloReceita = new JTextField();
+		pInsertReceita.add(txtNumProtocoloReceita, "2, 8, left, center");
+		txtNumProtocoloReceita.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("CNPJ");
 		pInsertReceita.add(lblNewLabel, "2, 10");
 		
-		txtReceitaCNPJ = new JTextField();
-		pInsertReceita.add(txtReceitaCNPJ, "2, 12, left, center");
-		txtReceitaCNPJ.setColumns(10);
+		txtCnpjReceita = new JTextField();
+		pInsertReceita.add(txtCnpjReceita, "2, 12, fill, default");
+		txtCnpjReceita.setColumns(10);
 		
 		JLabel lblValor = new JLabel("Valor");
 		pInsertReceita.add(lblValor, "2, 14");
 		
-		txtReceitaValor = new JTextField();
-		pInsertReceita.add(txtReceitaValor, "2, 16, left, center");
-		txtReceitaValor.setColumns(10);
+		txtValorReceita = new JTextField();
+		pInsertReceita.add(txtValorReceita, "2, 16, fill, default");
+		txtValorReceita.setColumns(10);
 		
 		JButton btnReceitaCadastrar = new JButton("Cadastrar");
 		pInsertReceita.add(btnReceitaCadastrar, "2, 18, left, center");
@@ -417,7 +410,7 @@ public class PrincipalGUI {
 				ColumnSpec.decode("40px"),
 				ColumnSpec.decode("250px"),
 				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("200px"),},
+				ColumnSpec.decode("200px:grow"),},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("30px"),
@@ -437,125 +430,21 @@ public class PrincipalGUI {
 		JTabbedPane tpDespesa = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Despesas", null, tpDespesa, null);
 		
-		JPanel pSelectDespesa = new JPanel();
-		tpDespesa.addTab("Consulta", null, pSelectDespesa, null);
-		pSelectDespesa.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("250px"),
-				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("200px"),},
-			new RowSpec[] {
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("30px"),
-				RowSpec.decode("40px"),
-				RowSpec.decode("125px"),
-				RowSpec.decode("30px"),
-				RowSpec.decode("125px"),}));
+		JPanel panel_8 = new JPanel();
+		tpDespesa.addTab("New tab", null, panel_8, null);
 		
-		JLabel lblConsultaDespesa = new JLabel("CONSULTA DESPESA");
-		lblConsultaDespesa.setFont(new Font("Dialog", Font.BOLD, 14));
-		pSelectDespesa.add(lblConsultaDespesa, "2, 2");
+		JPanel panel_9 = new JPanel();
+		tpDespesa.addTab("New tab", null, panel_9, null);
 		
-		JLabel lblContribuinte_2 = new JLabel("Contribuinte");
-		pSelectDespesa.add(lblContribuinte_2, "2, 3");
+		JPanel panel_10 = new JPanel();
+		tpDespesa.addTab("New tab", null, panel_10, null);
 		
-		JLabel lblDados = new JLabel("Dados:");
-		pSelectDespesa.add(lblDados, "4, 3");
+		JPanel panel_11 = new JPanel();
+		tpDespesa.addTab("New tab", null, panel_11, null);
 		
-		JList listDespesaContribuinte = new JList();
-		pSelectDespesa.add(listDespesaContribuinte, "2, 4, fill, fill");
-		
-		JLabel lblDespesaDados = new JLabel("");
-		pSelectDespesa.add(lblDespesaDados, "4, 4");
-		
-		JLabel lblDespesas = new JLabel("Despesas");
-		pSelectDespesa.add(lblDespesas, "2, 5");
-		
-		JList listDespesa = new JList();
-		pSelectDespesa.add(listDespesa, "2, 6, fill, fill");
-		
-		JPanel pInsertDespesa = new JPanel();
-		tpDespesa.addTab("Cadastro", null, pInsertDespesa, null);
-		pInsertDespesa.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.DEFAULT_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
-		
-		JLabel lblCadastroDeDespesas = new JLabel("CADASTRO DE DESPESAS");
-		lblCadastroDeDespesas.setFont(new Font("Dialog", Font.BOLD, 14));
-		pInsertDespesa.add(lblCadastroDeDespesas, "4, 2");
-		
-		JLabel label_5 = new JLabel("Núm.  Protocolo");
-		pInsertDespesa.add(label_5, "4, 6");
-		
-		txtDespesaNumProtocolo = new JTextField();
-		txtDespesaNumProtocolo.setColumns(10);
-		pInsertDespesa.add(txtDespesaNumProtocolo, "4, 8, left, center");
-		
-		JLabel label_6 = new JLabel("CNPJ");
-		pInsertDespesa.add(label_6, "4, 10");
-		
-		txtDespesaCNPJ = new JTextField();
-		txtDespesaCNPJ.setColumns(10);
-		pInsertDespesa.add(txtDespesaCNPJ, "4, 12, left, center");
-		
-		JLabel lblValor_1 = new JLabel("Valor");
-		pInsertDespesa.add(lblValor_1, "4, 14");
-		
-		txtDespesaValor = new JTextField();
-		txtDespesaValor.setColumns(10);
-		pInsertDespesa.add(txtDespesaValor, "4, 16, left, center");
-		
-		JButton btnDespesaCadastrar = new JButton("Cadastrar");
-		pInsertDespesa.add(btnDespesaCadastrar, "4, 18, left, center");
-		
-		JButton btnBtnDespesaLimpar = new JButton("Limpar");
-		pInsertDespesa.add(btnBtnDespesaLimpar, "4, 20, left, center");
-		
-		JPanel pDeleteDespesa = new JPanel();
-		tpDespesa.addTab("Excluir", null, pDeleteDespesa, null);
-		pDeleteDespesa.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("250px"),
-				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("200px:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("30px"),
-				RowSpec.decode("250px"),
-				RowSpec.decode("30px:grow"),}));
-		
-		JLabel label_7 = new JLabel("EXCLUIR RECEITAS");
-		label_7.setFont(new Font("Dialog", Font.BOLD, 14));
-		pDeleteDespesa.add(label_7, "2, 2");
-		
-		JList listDespesaExcluir = new JList();
-		pDeleteDespesa.add(listDespesaExcluir, "2, 3, fill, fill");
-		
-		JButton btnDespesaExcluir = new JButton("Excluir");
-		pDeleteDespesa.add(btnDespesaExcluir, "2, 4, left, center");
+		JPanel panel = new JPanel();
+		tpDespesa.addTab("New tab", null, panel, null);
+		panel.setLayout(new com.jgoodies.forms.layout.FormLayout(([Lcom.jgoodies.forms.layout.ColumnSpec;) null, ([Lcom.jgoodies.forms.layout.RowSpec;) null));
 		
 		JTabbedPane tpPJ = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.addTab("Pessoa Jurídica", null, tpPJ, null);
