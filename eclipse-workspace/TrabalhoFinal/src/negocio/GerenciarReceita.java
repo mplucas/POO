@@ -1,13 +1,16 @@
 package negocio;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dados.Bem;
 import dados.Contribuinte;
+import persistencia.BemDAO;
 import persistencia.ContribuinteDAO;
 
 public class GerenciarReceita {
 
-	public void insertContribuinte(Contribuinte contribuinte) {
+	public void insertContribuinte(Contribuinte contribuinte) throws SQLException{
 		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
 		contribuinteDAO.insert(contribuinte);
 	}
@@ -19,9 +22,26 @@ public class GerenciarReceita {
 		
 	}
 	
-	public void updateContribuinte(Contribuinte contribuinte) {
+	public void updateContribuinte(Contribuinte contribuinte) throws SQLException{
 		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
 		contribuinteDAO.update(contribuinte);
+	}
+	
+	public void insertBem(Bem bem) throws SQLException {
+		BemDAO bemDAO = BemDAO.getInstance();
+		bemDAO.insert(bem);
+	}
+	
+	public ArrayList<Bem> selectBem(int id_contribuinte) {
+		
+		BemDAO bemDAO = BemDAO.getInstance();
+		return bemDAO.select(id_contribuinte);
+		
+	}
+	
+	public void deleteBem(int id) {
+		BemDAO bemDAO = BemDAO.getInstance();
+		bemDAO.delete(id);
 	}
 	
 }

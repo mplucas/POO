@@ -43,4 +43,10 @@ public class Bem {
 		this.id_contribuinte = id_contribuinte;
 	}
 	
+	@Override
+	public String toString() {
+		String aux = nome + " - " + tipo;
+		return aux;
+	}
+	
 }

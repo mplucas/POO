@@ -76,7 +76,7 @@ public class BemDAO {
 			sqlSelect.setInt(1, id_contribuinte);
 			ResultSet rs = sqlSelect.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 			
 				bem = new Bem();
 				bem.setId(rs.getInt("id"));

@@ -1,0 +1,42 @@
+package negocio;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import dados.Bem;
+import dados.Contribuinte;
+import persistencia.BemDAO;
+import persistencia.ContribuinteDAO;
+
+public class GerenciarReceita {
+
+	public void insertContribuinte(Contribuinte contribuinte) throws SQLException{
+		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
+		contribuinteDAO.insert(contribuinte);
+	}
+	
+	public ArrayList<Contribuinte> selectAllContribuinte() {
+		
+		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
+		return contribuinteDAO.selectAll();
+		
+	}
+	
+	public void updateContribuinte(Contribuinte contribuinte) {
+		ContribuinteDAO contribuinteDAO = ContribuinteDAO.getInstance();
+		contribuinteDAO.update(contribuinte);
+	}
+	
+	public void insertBem(Bem bem) {
+		BemDAO bemDAO = BemDAO.getInstance();
+		bemDAO.insert(bem);
+	}
+	
+	public ArrayList<Bem> selectBem(int id_contribuinte) {
+		
+		BemDAO bemDAO = BemDAO.getInstance();
+		return bemDAO.select(id_contribuinte);
+		
+	}
+	
+}

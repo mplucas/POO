@@ -35,6 +35,7 @@ import javax.swing.DefaultListModel;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
@@ -194,8 +195,13 @@ public class PrincipalGUI {
 				contribuinte.setIdade(Integer.parseInt(txtCadastroInsertIdade.getText()));
 				contribuinte.setEndereco(txtCadastroInsertEndereco.getText());
 				contribuinte.setContaBancaria(Integer.parseInt(txtCadastroInsertContaBancaria.getText()));
-				gerenciarReceita.insertContribuinte(contribuinte);
-				JOptionPane.showMessageDialog(null, "Cadastrado com sucesso.");
+				try {
+					gerenciarReceita.insertContribuinte(contribuinte);
+				}catch(SQLException e1){
+					e1.printStackTrace();
+				}finally {
+					JOptionPane.showMessageDialog(null, "Cadastrado com sucesso.");
+				}
 			}
 		});
 		pInsertContribuinte.add(btnContribuinteCadastrar, "2, 24, left, center");
@@ -241,6 +247,15 @@ public class PrincipalGUI {
 		pSelectContribuinte.add(txtContribuinte, "4, 3, fill, fill");
 		
 		JButton btnVerificarBens = new JButton("Verificar Bens");
+		btnVerificarBens.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int iSelectionado = listContribuinte.getSelectedIndex();
+				if(iSelectionado >= 0 && iSelectionado < aContribuinte.size()) {
+					BensGUI windowBens = new BensGUI(aContribuinte.get(iSelectionado).getId());
+					windowBens.main();
+				}
+			}
+		});
 		pSelectContribuinte.add(btnVerificarBens, "2, 4");
 		
 		JButton btnVerificarDependentes = new JButton("Verificar Dependentes");
@@ -376,8 +391,15 @@ public class PrincipalGUI {
 					contribuinteAlterado.setIdade(Integer.parseInt(txtContribuinteUpdateIdade.getText()));
 					contribuinteAlterado.setEndereco(txtContribuinteUpdateEndereco.getText());
 					contribuinteAlterado.setContaBancaria(Integer.parseInt(txtContribuinteUpdateContaBanc.getText()));
-					gerenciarReceita.updateContribuinte(aContribuinte.get(iSelecionado));
-					JOptionPane.showMessageDialog(null, "Alterado com sucesso.");
+					try {
+						gerenciarReceita.updateContribuinte(aContribuinte.get(iSelecionado));
+					}catch(SQLException e1){
+						
+						e1.printStackTrace();
+					
+					}finally {
+						JOptionPane.showMessageDialog(null, "Alterado com sucesso.");
+					}					
 				}else {
 					JOptionPane.showMessageDialog(null, "Selecione um Contribuinte para ser alterado.");
 				}
